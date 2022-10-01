@@ -1,52 +1,37 @@
-var express = require("express");
-var server = express();
+var express = require('express')
 
-var path = require("path");
+var app = express()
 
-function start(){
-    console.log("Server is started on port 8090");
-}
+const SERVER_PORT = 3000
+const SERVER_HOST = "localhost"
 
-server.get("/", function(req, resp){
-    let id = req.query.e_id;
-    let name = req.query.e_name;
-    let contact = req.query.e_contact;
-    let city = req.query.e_city;
-    let email = req.query.e_email;
-    resp.send("Id: " + id + "<br /> Name: " + name + "<br /> Contact: " + contact+ "<br /> City: " + city+ "<br /> Email: " + email);
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+
+//http://localhost:3000/
+app.get('/', function (req, res) {
+    res.send("<h1>Home Page</h1>")
 })
 
-// server.get("/", function(req, resp){
-//     resp.send("<h1>Hello World!!!");
-// })
 
-// server.get("/contact", function(req, resp){
-//     resp.send("<p>We are located in Lambton College</p>")
-// })
+//http://localhost:3000/profile
+app.post('/profile', (req, res) => {
+    console.log(req.body)
+    res.json(req.body)
+  })
+  
+  //http://localhost:3000/admin
+  app.get('/admin', (req, res) => {
+    res.send('Admin Homepage')
+  })
+  
+  //http://localhost:3000/user/100
+  app.get("/user/:id", (req, res)=> {
+        res.send(`User ID: ${req.params.id}`);
+      }
+  )
 
-server.get("/about", function(req, resp){
-    resp.send("<p>Our student are perfect</p>")
+app.listen(process.env.PORT  || SERVER_PORT, () => {
+    console.log(`Server running at http://${SERVER_HOST}:${SERVER_PORT}/`);
 })
-
-server.get("/about/student", function(req, resp){
-    resp.send("<p>Students are perfect</p>")
-})
-
-server.get("/index", function(req, resp){
-    resp.sendFile(path.join(__dirname,"/view/index.html"));
-})
-
-server.get("/contact", function(req, resp){
-    resp.sendFile(path.join(__dirname,"/view/contact.html"));
-})
-
-server.get("/form", function(req, resp){
-    resp.sendFile(path.join(__dirname,"/view/form.html"));
-})
-
-server.get("/*", function(req, resp){
-    resp.send("<h1>Resource are not available</h1>")
-})
-
-server.listen(8090, start);
-
