@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/kmlaryal/csat-cloud-computing.git"
   },
   "author": "Kamal Aryal",
   "license": "ISC"
