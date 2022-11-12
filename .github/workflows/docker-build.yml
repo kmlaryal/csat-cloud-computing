@@ -43,7 +43,7 @@ jobs:
           # Note: tags has to be all lower-case
           tags: |
             aryalkamal/nodejs-image-demo-csad-1:latest 
-            ghcr.io/kmlaryal/csat-cloud-computing:latest
+            ghcr.io/aryalkamal/nodejs-image-demo-csad-1:latest
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/master' }}
 
